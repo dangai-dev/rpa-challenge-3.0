@@ -32,9 +32,6 @@ class Scraper:
                         postsList[-1].date, "%Y-%m-%d"
                     ).date()
                     if last_post_date.month < search_until_date.month:
-                        logging.warning(
-                            f"... A DATA QUEBROU AQUI: {last_post_date.month} < {search_until_date.month}..."
-                        )
                         break
 
                 post_text = post.find_elements(By.CLASS_NAME, Locators.POST_TEXT)
