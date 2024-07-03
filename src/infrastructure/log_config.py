@@ -1,5 +1,7 @@
 import logging
+
 from colorlog import ColoredFormatter
+
 
 class LogConfig:
     logger = logging.getLogger()
@@ -10,14 +12,14 @@ class LogConfig:
         datefmt=None,
         reset=True,
         log_colors={
-            'DEBUG': 'cyan',
-            'INFO': 'green',
-            'WARNING': 'yellow',
-            'ERROR': 'red',
-            'CRITICAL': 'red,bg_white',
+            "DEBUG": "cyan",
+            "INFO": "green",
+            "WARNING": "yellow",
+            "ERROR": "red",
+            "CRITICAL": "red,bg_white",
         },
         secondary_log_colors={},
-        style='%'
+        style="%",
     )
 
     console_handler = logging.StreamHandler()

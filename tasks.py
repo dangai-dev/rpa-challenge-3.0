@@ -1,8 +1,9 @@
 import logging
-from src.infrastructure.log_config import LogConfig
+
 from robocorp.tasks import task
 
 from src.application.apnews_robot import ApNewsRobot
+from src.infrastructure.log_config import LogConfig
 
 
 @task

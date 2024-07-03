@@ -1,4 +1,5 @@
-import logging, time
+import logging
+import time
 
 from RPA.Browser.Selenium import Selenium
 
@@ -46,9 +47,7 @@ class ApNewsRobot:
         self.browser.wait_until_element_is_visible(Locators.SORT_SELECT)
         self.browser.click_element_when_visible(Locators.SORT_SELECT)
 
-        self.browser.wait_until_element_is_visible(
-            Locators.SORT_SELECT_NEWEST_OPTION
-        )
+        self.browser.wait_until_element_is_visible(Locators.SORT_SELECT_NEWEST_OPTION)
         self.browser.click_element_when_visible(Locators.SORT_SELECT_NEWEST_OPTION)
 
         self.filter()

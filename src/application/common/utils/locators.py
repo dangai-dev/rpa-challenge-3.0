@@ -1,7 +1,7 @@
 from src.infrastructure.settings import FILTER_TO_SELECT
 
 
-class Locators: 
+class Locators:
     SEARCH_BTN = (
         '//*[@id="Page-header-trending-zephr"]/div[2]/div[3]/bsp-search-overlay/button'
     )
@@ -12,8 +12,8 @@ class Locators:
     EXPAND_FILTER_BTN = '//div[contains(@class, "SearchFilter-heading")]'
     CHECK_FILTER = f'//span[normalize-space(text())="{FILTER_TO_SELECT}"]/preceding-sibling::input[@type="checkbox"]'
     POSTS_DIV = '//div[@class="SearchResultsModule-results"]//bsp-list-loadmore[@class="PageListStandardD"]//div[@class="PageList-items-item"]//div[@class="PagePromo"]'
-    POST_TEXT = 'PagePromoContentIcons-text'
-    POST_DATE = 'Timestamp-template'
-    POST_DATE_NOW = 'Timestamp-template-now'
-    POST_IMG = 'Image'
-    NEXT_PAGE_BTN = 'class:Pagination-nextPage'
+    POST_TEXT = "PagePromoContentIcons-text"
+    POST_DATE = "Timestamp-template"
+    POST_DATE_NOW = "Timestamp-template-now"
+    POST_IMG = "Image"
+    NEXT_PAGE_BTN = "class:Pagination-nextPage"

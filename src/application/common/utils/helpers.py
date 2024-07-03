@@ -1,45 +1,43 @@
 import logging
 import re
-
+from collections import Counter
+from datetime import datetime, timedelta
 from typing import List
 
 import pandas as pd
 import requests
+from openpyxl.utils import get_column_letter
 from RPA.Browser.Selenium import By
 
 from src.application.common.models.post import Post
 from src.application.common.utils.locators import Locators
-from collections import Counter
-
-from datetime import datetime, timedelta
-
-from openpyxl.utils import get_column_letter
 
 
 class Helper:
     @staticmethod
     def search_text(search_text, title, description):
         try:
-            text = title + ' ' + description
-            words = re.findall(r'\b\w+\b', text.lower())
+            text = title + " " + description
+            words = re.findall(r"\b\w+\b", text.lower())
             words_counter = Counter(words)
-            
+
             search_words = search_text.split(" ")
             total_occurrences = 0
             for search_word in search_words:
                 if len(search_word) > 1:
                     total_occurrences += words_counter[search_word.lower()]
-            
+
             return total_occurrences
         except:
-            logging.error(f'... ERROR SEARCHING WORDS OCCURRENCES ...')
-    
+            logging.error(f"... ERROR SEARCHING WORDS OCCURRENCES ...")
 
     @staticmethod
     def has_money(title, description):
         pattern = r"\$(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)|\b(\d+)\s*(?:dollars|USD)\b"
 
-        return bool(re.findall(pattern, title)) or bool(re.findall(pattern, description))
+        return bool(re.findall(pattern, title)) or bool(
+            re.findall(pattern, description)
+        )
 
     @staticmethod
     def excel_generator(posts: List[Post]) -> None:
@@ -55,16 +53,16 @@ class Helper:
                 }
                 for post in posts
             ]
-    
-            df = pd.DataFrame(data)
-            filename = 'posts-' + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + '.xlsx'
-            filepath = f'./output/{filename}'
-            df.to_excel(filepath, index=False)
-            
-            with pd.ExcelWriter(filepath, engine='openpyxl') as writer:
-                df.to_excel(writer, index=False, sheet_name='Sheet1')
 
-                worksheet = writer.sheets['Sheet1']
+            df = pd.DataFrame(data)
+            filename = "posts-" + datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + ".xlsx"
+            filepath = f"./output/{filename}"
+            df.to_excel(filepath, index=False)
+
+            with pd.ExcelWriter(filepath, engine="openpyxl") as writer:
+                df.to_excel(writer, index=False, sheet_name="Sheet1")
+
+                worksheet = writer.sheets["Sheet1"]
 
                 for column in worksheet.columns:
                     max_length = 0
@@ -79,28 +77,28 @@ class Helper:
 
                     adjusted_width = max_length + 2
                     worksheet.column_dimensions[column_letter].width = adjusted_width
-                    
+
             logging.info("... EXCEL FILE BUILT 🗳️ ...")
-            
+
         except Exception as ex:
             logging.error("... ERROR BUILDING EXCEL FILE 😢...")
 
     @staticmethod
     def convert_to_datetime(date_str):
         try:
-            if 'yesterday' in date_str.lower():
+            if "yesterday" in date_str.lower():
                 return (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-            
-            to_find = ['min', 'mins', 'hour', 'hours']
+
+            to_find = ["min", "mins", "hour", "hours"]
             today_post = False
             for str in to_find:
                 today_post = str in date_str
                 if today_post:
-                    return datetime.now().strftime('%Y-%m-%d')
+                    return datetime.now().strftime("%Y-%m-%d")
             else:
-                if Helper.check_dateformat(date_str) :
+                if Helper.check_dateformat(date_str):
                     return date_str
-                
+
                 date_str = date_str.split(",")
                 year = None
 
@@ -117,7 +115,7 @@ class Helper:
 
             return formatted_datetime
         except:
-            logging.error(f'... ERROR CONVERTING POST DATE - DATE_STR: {date_str} ...')
+            logging.error(f"... ERROR CONVERTING POST DATE - DATE_STR: {date_str} ...")
 
     @staticmethod
     def get_image(post, title):
@@ -133,7 +131,7 @@ class Helper:
                 return filename
             else:
                 return None
-            
+
         except:
             logging.error(f"... UNABLE TO GET IMAGE FROM POST - TITLE: {title} ...")
 
@@ -142,7 +140,7 @@ class Helper:
         filename = re.sub(r"[^\w\s]", "", text).replace(" ", "_").strip().lower()
 
         return filename + extension
-    
+
     @staticmethod
     def check_dateformat(date_str):
-        return bool(re.match(r'^\d{4}-\d{2}-\d{2}$', date_str))
+        return bool(re.match(r"^\d{4}-\d{2}-\d{2}$", date_str))
