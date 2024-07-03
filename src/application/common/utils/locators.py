@@ -2,9 +2,7 @@ from src.infrastructure.settings import FILTER_TO_SELECT
 
 
 class Locators:
-    SEARCH_BTN = (
-        '//*[@id="Page-header-trending-zephr"]/div[2]/div[3]/bsp-search-overlay/button'
-    )
+    SEARCH_BTN = '//bsp-search-overlay[@class="SearchOverlay"]//button[@class="SearchOverlay-search-button"]'
     SEARCH_INPUT = '//*[@id="Page-header-trending-zephr"]/div[2]/div[3]/bsp-search-overlay/div/form/label/input'
     SEARCH_SUBMIT = '//*[@id="Page-header-trending-zephr"]/div[2]/div[3]/bsp-search-overlay/div/form/button'
     SORT_SELECT = '//select[@name="s"]'
