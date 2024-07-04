@@ -15,4 +15,4 @@ class Locators:
     POST_DATE_NOW = "Timestamp-template-now"
     POST_IMG = "Image"
     NEXT_PAGE_BTN = "class:Pagination-nextPage"
-    ONE_TRUST_BTN = '//div[´@id="onetrust-accept-btn-handler"]'
+    ONE_TRUST_BTN = '//div[@id="onetrust-accept-btn-handler"]'

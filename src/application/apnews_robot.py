@@ -26,13 +26,13 @@ class ApNewsRobot:
     def start(self):
         logging.info(f"... OPENING BROWSER - LOCATION: {WEBSITE_URL} ...")
         browser_opts = {
-            "arguments": ["--headless", "--disable-gpu", "--window-size=1920,1080"]
+            "arguments": ["--headless", "--disable-gpu"]
         }
         self.browser.open_available_browser(
             WEBSITE_URL, headless=True, options=browser_opts
         )
 
-        self.browser.wait_until_element_is_visible(Locators.ONE_TRUST_BTN)
+        # self.browser.wait_until_element_is_visible(Locators.ONE_TRUST_BTN)
         self.search()
 
     def search(self):
