@@ -36,7 +36,6 @@ class ApNewsRobot:
 
     def search(self):
         logging.info(f"... SEARCH SENTENCE: {SEARCH_TEXT} ...")
-        time.sleep(10)
         self.browser.wait_until_element_is_visible(Locators.SEARCH_BTN)
         self.browser.click_element(Locators.SEARCH_BTN)
 
