@@ -32,6 +32,7 @@ class ApNewsRobot:
             WEBSITE_URL, headless=True, options=browser_opts
         )
 
+        self.browser.wait_until_element_is_visible(Locators.ONE_TRUST_BTN)
         self.search()
 
     def search(self):
