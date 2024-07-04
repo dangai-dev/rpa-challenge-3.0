@@ -25,7 +25,7 @@ class ApNewsRobot:
 
     def start(self):
         logging.info(f"... OPENING BROWSER - LOCATION: {WEBSITE_URL} ...")
-        self.browser.open_available_browser(WEBSITE_URL)
+        self.browser.open_available_browser(WEBSITE_URL, headless=True)
         self.browser.maximize_browser_window()
 
         self.search()
