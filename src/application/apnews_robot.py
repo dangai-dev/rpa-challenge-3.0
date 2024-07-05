@@ -29,11 +29,9 @@ class ApNewsRobot:
             "arguments": ["--headless", "--disable-gpu"]
         }
         self.browser.open_available_browser(
-            WEBSITE_URL, headless=True, options=browser_opts
+            WEBSITE_URL, options=browser_opts
         )
 
-        # self.browser.wait_until_element_is_visible(Locators.ONE_TRUST_BTN)
-        time.sleep(20)
         self.search()
 
     def search(self):
